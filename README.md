@@ -65,6 +65,7 @@ options:
   --dev                     Development mode. It restarts the server based on file changes.
   --log-level LOG_LEVEL     Set the log level name
   --create                  Create a new project template.
+  --project-type            Specify the desired project type: mongo, postgres, sqlalchemy or prisma.
   --docs                    Open the Robyn documentation.
   --open-browser            Open the browser on successful start.
 ```

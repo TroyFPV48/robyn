@@ -19,23 +19,6 @@ To create a new MongoDB project, run:
 
 python main.py --create --project-type=mongo
 
-
-## Additional Options
-
-Here are some additional options you can use with the `--create` command:
-
-- `--processes`: Choose the number of processes. [Default: 1]
-- `--workers`: Choose the number of workers. [Default: 1]
-- `--dev`: Enable development mode. It restarts the server based on file changes.
-- `--log-level`: Set the log level name. [Default: INFO]
-- `--open-browser`: Open the browser on successful server start.
-
-**Example:**
-
-To create a new MongoDB project with 4 processes and 2 workers, and enable development mode, run:
-
-python main.py --create --project-type=mongo --processes=4 --workers=2 --dev
-
 ## Docker Configuration
 
 If you want to have Docker in your project, you can add the `--docker` to the `--create` command:

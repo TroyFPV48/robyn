@@ -4,20 +4,15 @@
 
 To create a new Robyn project, use the `--create` option followed by the desired project type.
 
-python main.py --create --project-type=<project-type>
+python3 -m robyn --create
 
 
-Replace `<project-type>` with one of the following options:
+When prompted for project type, type one of the following options:
 - `mongo`: Create a MongoDB project
 - `postgres`: Create a PostgreSQL project
 - `sqlalchemy`: Create a SQLAlchemy project
 - `prisma`: Create a Prisma project
 
-**Example:**
-
-To create a new MongoDB project, run:
-
-python main.py --create --project-type=mongo
 
 ## Docker Configuration
 

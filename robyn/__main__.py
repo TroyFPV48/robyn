@@ -16,10 +16,16 @@ def check(value, input_name):
         value = input(f"Need {input_name}? (Y/N) ")
     return value
 
+def check_project_type(value, input_name):
+    while value not in ["mongo", "postgres", "sqlalchemy", "prisma"]:
+        print("Unknown project type. Please choose one of mongo, postgres, sqlalchemy, or prisma.")
+        value = input(f"Enter the {input_name} (mongo/postgres/sqlalchemy/prisma): ").lower()
+    return value
+
 
 def create_robyn_app():
     project_dir = input("Enter the name of the project directory: ")
-    docker = input("Need Docker? (Y/N) ")
+    docker = input("Need Docker? (Y/N) ")  
 
     #initialize a new Robyn project
     docker = check(docker, "Docker")
@@ -32,8 +38,9 @@ def create_robyn_app():
     #create the main application file
     app_file_path = os.path.join(project_dir, "app.py")
     
-    #boilerplate code based on the project type
-    project_type = input("Enter the project type (mongo/postgres/sqlalchemy): ")
+    project_type = check_project_type("", "project type")
+
+     #boilerplate code based on the project type
     if project_type == "mongo":
         #MongoDB project boilerplate code
         with open(app_file_path, "w") as f:

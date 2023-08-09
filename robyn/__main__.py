@@ -1,20 +1,10 @@
 import os
 import webbrowser
-import pymongo
-import psycopg2
-from sqlalchemy import create_engine, Column, Integer, String, text
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-
-
+from InquirerPy import prompt
+from InquirerPy.base.control import Choice
 from .argument_parser import Config
 
 
-def check(value, input_name):
-    while value not in ["Y", "N"]:
-        print("Invalid input. Please enter Y or N")
-        value = input(f"Need {input_name}? (Y/N) ")
-    return value
 
 def check_project_type(value, input_name):
     while value not in ["mongo", "postgres", "sqlalchemy", "prisma"]:
@@ -24,11 +14,21 @@ def check_project_type(value, input_name):
 
 
 def create_robyn_app():
-    project_dir = input("Enter the name of the project directory: ")
-    docker = input("Need Docker? (Y/N) ")  
-
-    #initialize a new Robyn project
-    docker = check(docker, "Docker")
+    questions = [
+        {"type": "input", "message": "Enter the name of the project directory:"},
+        {
+            "type": "list",
+            "message": "Need Docker? (Y/N)",
+            "choices": [
+                Choice("Y", name="Y"),
+                Choice("N", name="N"),
+            ],
+            "default": None,
+        },
+    ]
+    result = prompt(questions=questions)
+    project_dir = result[0]
+    docker = result[1]
 
     print(f"Creating a new Robyn project '{project_dir}'...")
 
@@ -38,6 +38,7 @@ def create_robyn_app():
     #create the main application file
     app_file_path = os.path.join(project_dir, "app.py")
     
+
     project_type = check_project_type("", "project type")
 
      #boilerplate code based on the project type

@@ -5,14 +5,6 @@ from InquirerPy.base.control import Choice
 from .argument_parser import Config
 
 
-
-def check_project_type(value, input_name):
-    while value not in ["mongo", "postgres", "sqlalchemy", "prisma"]:
-        print("Unknown project type. Please choose one of mongo, postgres, sqlalchemy, or prisma.")
-        value = input(f"Enter the {input_name} (mongo/postgres/sqlalchemy/prisma): ").lower()
-    return value
-
-
 def create_robyn_app():
     questions = [
         {"type": "input", "message": "Enter the name of the project directory:"},
@@ -25,10 +17,22 @@ def create_robyn_app():
             ],
             "default": None,
         },
+        {
+            "type": "list",
+            "message": "Please select project type (Mongo/Postgres/Sqlalchemy/Prisma): ",
+            "choices": [
+                Choice("mongo", name="Mongo"),
+                Choice("postgres", name="Postgres"),
+                Choice("sqlalchemy", name="Sqlalchemy"),
+                Choice("prisma", name="Prisma"),
+            ],
+            "default": None,
+        },
     ]
     result = prompt(questions=questions)
     project_dir = result[0]
     docker = result[1]
+    project_type = result[2]
 
     print(f"Creating a new Robyn project '{project_dir}'...")
 
@@ -37,9 +41,6 @@ def create_robyn_app():
 
     #create the main application file
     app_file_path = os.path.join(project_dir, "app.py")
-    
-
-    project_type = check_project_type("", "project type")
 
      #boilerplate code based on the project type
     if project_type == "mongo":

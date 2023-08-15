@@ -52,11 +52,6 @@ class Config:
             default=False,
             help="Open the browser on successful start.",
         )
-        parser.add_argument(
-            "--project-type",
-            choices=["mongo", "postgres", "sqlalchemy", "prisma"],
-            help="Specify the desired project type: mongo, postgres, sqlalchemy or prisma.",
-        )
 
         args, _ = parser.parse_known_args()
 
